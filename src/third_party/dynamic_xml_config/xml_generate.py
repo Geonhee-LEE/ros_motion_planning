@@ -18,7 +18,7 @@ import sys, os
 
 
 class XMLGenerator(object):
-    def __init__(self) -> None:
+    def __init__(self):
         # get the root path of package(src layer)
         self.root_path = os.path.split(os.path.realpath(__file__))[0] + "/../../"
         # user configure
@@ -64,7 +64,7 @@ class XMLGenerator(object):
             the path of file(.launch.xml) to write.
         """
 
-        def getRobotArg(name: str, index: int = -1):
+        def getRobotArg(name, index = -1):
             if index == -1:
                 e = XMLGenerator.createElement(
                     "arg", props={"name": name, "value": "$(eval arg('robot' + str(arg('robot_number')) + '_" + name + "'))"}
@@ -274,7 +274,7 @@ class XMLGenerator(object):
             tree.write(f, encoding="utf-8", xml_declaration=True)
 
     @staticmethod
-    def yamlParser(path: str) -> dict:
+    def yamlParser(path):
         """
         Parser user configure file(.yaml).
 
@@ -293,7 +293,7 @@ class XMLGenerator(object):
         return data
 
     @staticmethod
-    def indent(elem: ET.Element, level: int = 0, tab_size: int = 2) -> None:
+    def indent(elem, level = 0, tab_size = 2):
         """
         Format the generated xml document.
 
@@ -318,7 +318,7 @@ class XMLGenerator(object):
                 elem.tail = i
 
     @staticmethod
-    def createElement(name: str, text: str = None, props: dict = {}) -> ET.Element:
+    def createElement(name, text = None, props = {}):
         e = ET.Element(name, attrib=props)
         if not text is None:
             e.text = text
